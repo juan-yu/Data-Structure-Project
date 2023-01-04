@@ -100,8 +100,6 @@ public HashMap<String,String> relatedSearch() throws IOException{
 				String keyword = citeUrl.substring(citeUrl.indexOf("q=")+2,citeUrl.indexOf("&sa")).replace(" ","");
 				String relatedUrl ="http://www.google.com/search?q="+URLEncoder.encode(keyword, StandardCharsets.UTF_8)+"&oe=utf8&num=30";
 				relatedKeyword.put(keyword, relatedUrl);
-				System.out.println(keyword);
-				System.out.println(relatedUrl);
 			} catch (IndexOutOfBoundsException exc) {
 
 //				e.printStackTrace();

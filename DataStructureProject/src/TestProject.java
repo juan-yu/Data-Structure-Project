@@ -47,6 +47,9 @@ public class TestProject extends HttpServlet {
 		HashMap<String, String> query;
 	
 			query = google.query();
+			HashMap<String, String> relatedquery;
+			
+			relatedquery = google.relatedSearch();
 			
 		String[][] s = new String[query.size()][2];
 		request.setAttribute("query", s);

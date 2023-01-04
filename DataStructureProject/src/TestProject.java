@@ -42,10 +42,12 @@ public class TestProject extends HttpServlet {
 			request.getRequestDispatcher("Search.jsp").forward(request, response);
 			return;
 		}
-        
+	
 		GoogleQuery google = new GoogleQuery(request.getParameter("keyword"));
-		HashMap<String, String> query = google.query();
-		
+		HashMap<String, String> query;
+	
+			query = google.query();
+			
 		String[][] s = new String[query.size()][2];
 		request.setAttribute("query", s);
 		int num = 0;
@@ -56,6 +58,8 @@ public class TestProject extends HttpServlet {
 		    s[num][1] = value;
 		    num++;
 		}
+		
+
 		request.getRequestDispatcher("googleitem.jsp")
 		 .forward(request, response); 
 		

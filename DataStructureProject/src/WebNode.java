@@ -21,9 +21,9 @@ public class WebNode {
         nodeScore = webPage.score;
 
         //nodeScore += all children's nodeScore
-        //for(WebNode child : children){
-          //  nodeScore += child.nodeScore;
-        //}
+        for(WebNode child : children){
+            nodeScore += child.nodeScore;
+        }
     }
 
     public void addChild(WebNode child){

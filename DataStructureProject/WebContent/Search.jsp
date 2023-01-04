@@ -8,13 +8,11 @@
 <style type="text/css">
 .title{
 position:absolute;
-
 left:50%;
 top:10%;
 margin-top:-50px;
 margin-left:-500px
 }
-
 .button{
 	position:absolute;
 	width:45px;
@@ -199,7 +197,6 @@ margin-left:-500px
     top:50px;
   }
 }
-
 .box:after{
   content:'';
   position:absolute;

@@ -1,8 +1,8 @@
 import java.util.ArrayList;
 
 public class Sort {
-    ArrayList<WebNode> lst;
-    public Sort(ArrayList<WebNode>lst ){
+    ArrayList<WebTree> lst;
+    public Sort(ArrayList<WebTree>lst ){
             this.lst = lst;
     }
 
@@ -22,7 +22,7 @@ public class Sort {
         if(leftbound<rightbound) {
             int i = leftbound-1;
             for(int j=leftbound; j<rightbound ;j++) {
-                if(lst.get(j).getNodeScore()>lst.get(rightbound).getNodeScore()) {
+                if(lst.get(j).root.getNodeScore()>lst.get(rightbound).root.getNodeScore()) {
                     i++;
                     swap(i,j);
                 }
@@ -35,7 +35,7 @@ public class Sort {
     }
 
     private void swap( int aIndex, int bIndex){
-        WebNode temp = lst.get(aIndex);
+        WebTree temp = lst.get(aIndex);
         lst.set(aIndex, lst.get(bIndex));
         lst.set(bIndex, temp);
     }

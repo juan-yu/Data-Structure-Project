@@ -14,14 +14,12 @@ public class WebTree {
 	
 	private void setPostOrderScore(WebNode startNode, ArrayList<Keyword> keywords) throws IOException{
 		//2. compute the score of children nodes via post-order, then setNodeScore for startNode
-		if(startNode.children.equals(null)) {
-			startNode.setNodeScore(keywords);
+		for(WebNode child : startNode.children){
+			setPostOrderScore(child, keywords);		
 		}
-		for(WebNode child:startNode.children) {
-			setPostOrderScore(child,keywords);
-		}
+		//setNode score of startNode
 		startNode.setNodeScore(keywords);
-	}
+		}
 	
 	public void eularPrintTree(){
 		eularPrintTree(root);

@@ -41,8 +41,8 @@ public class GoogleQuery
 
 	{
 
-		this.searchKeyword = searchKeyword +" 黑歷史";
-		this.url = "http://www.google.com/search?q="+URLEncoder.encode(this.searchKeyword, StandardCharsets.UTF_8)+"&oe=utf8&num=30";
+		this.searchKeyword = searchKeyword +" 黑歷史"+" 政治";
+		this.url = "http://www.google.com/search?q="+URLEncoder.encode(this.searchKeyword, StandardCharsets.UTF_8)+"&oe=utf8&num=50";
 		System.out.println(url);
 	}
 
@@ -77,25 +77,30 @@ public class GoogleQuery
 
 	{
 		Keyword a =new Keyword("造假",4);
-	    Keyword b =new Keyword("黑歷史",2);
+	    Keyword b =new Keyword("黑歷史",5);
 	    Keyword c =new Keyword("抄襲",3);
 	    Keyword d =new Keyword("出軌",3);
-	    Keyword e =new Keyword("鬥毆",2);
-	    Keyword f =new Keyword("情色",2);
-	    Keyword h =new Keyword("說大話",2);
-	    Keyword k =new Keyword("外遇",2);
-	    Keyword l =new Keyword("酒店",2);
-	    Keyword m =new Keyword("鬥爭",2);
+	    Keyword e =new Keyword("鬥毆",4);
+	    Keyword f =new Keyword("情色",5);
+	    Keyword h =new Keyword("說大話",4);
+	    Keyword k =new Keyword("外遇",5);
+	    Keyword l =new Keyword("酒店",4);
+	    Keyword m =new Keyword("鬥爭",4);
 	    Keyword n =new Keyword(this.searchKeyword,5);
-	    Keyword o =new Keyword("造假",3);
-	    Keyword p =new Keyword("黑道",2);
-	    Keyword q =new Keyword("賄選",2);
-	    Keyword r =new Keyword("弊案",2);
-	    Keyword s =new Keyword("黑金",3);
-	    Keyword t =new Keyword("毒",2);
-	    Keyword u =new Keyword("殺人",2);
+	    Keyword o =new Keyword("造假",5);
+	    Keyword p =new Keyword("黑道",10);
+	    Keyword q =new Keyword("賄選",20);
+	    Keyword r =new Keyword("弊案",10);
+	    Keyword s =new Keyword("黑金",8);
+	    Keyword t =new Keyword("毒",8);
+	    Keyword u =new Keyword("殺人",10);
+	    Keyword v =new Keyword("涉黑",8);
+	    Keyword w =new Keyword("起底",4);
+	    Keyword x =new Keyword("中資",3);
+	    Keyword y =new Keyword("玩弄",3);
+	    Keyword z =new Keyword("小三",3);
 
-	    ArrayList<WebNode> Web = new ArrayList<WebNode>();
+	    ArrayList<WebTree> Web = new ArrayList<WebTree>();
         ArrayList<Keyword> keywords = new ArrayList<Keyword>();
         keywords.add(a);
         keywords.add(b);
@@ -115,6 +120,11 @@ public class GoogleQuery
         keywords.add(s);
         keywords.add(t);
         keywords.add(u);
+        keywords.add(v);
+        keywords.add(w);
+        keywords.add(x);
+        keywords.add(y);
+        keywords.add(z);
 
 		if(content==null)
 
@@ -129,7 +139,7 @@ public class GoogleQuery
 		Document doc = Jsoup.parse(content);
 		//System.out.println(doc.text());
 		Elements lis = doc.select("div");
-//		 System.out.println(lis);
+		// System.out.println(lis);
 		lis = lis.select(".kCrYT");
 		// System.out.println(lis.size());
 		int i =0;
@@ -139,19 +149,28 @@ public class GoogleQuery
 			try 
 
 			{
+				
 				String citeUrl = li.select("a").get(0).attr("href");
 				if(citeUrl.contains("&sa=U&ved=")){
 					citeUrl = citeUrl.substring(0, citeUrl.indexOf("&sa=U&ved="));
 				}
-				citeUrl= java.net.URLDecoder.decode(citeUrl, StandardCharsets.UTF_8);
 				String title = li.select("a").get(0).select(".vvjwJb").text();
 				if(title.equals("")) {
 					continue;
 				}
-				
-				System.out.println(title + ","+citeUrl);
-				Web.add(new WebNode(new WebPage(citeUrl,title)));
-				Web.get(i).setNodeScore(keywords);
+				SubPage subpage = new SubPage(citeUrl);
+		
+				WebPage rootPage = new WebPage(citeUrl,title);
+				WebTree tree = new WebTree(rootPage);
+				if (subpage.query()!=null) {
+					int num = subpage.query().size() - 1;
+					for (int j = 0; j < num; j++) {
+						tree.root.addChild(subpage.query().get(j));
+					}
+					System.out.println(title + "," + citeUrl);
+				}
+				Web.add(tree);
+				Web.get(i).setPostOrderScore(keywords);
 				i++;
 			} catch (IndexOutOfBoundsException exc) {
 
@@ -164,9 +183,9 @@ public class GoogleQuery
 		}
 		Sort urlSort = new Sort(Web);
 		urlSort.sort();
-		for(WebNode node: Web) {
-			retVal.put(node.getName(), node.getUrl());
-			System.out.println(node.nodeScore);
+		for(WebTree node: Web) {
+			retVal.put(node.root.getName(), node.root.getUrl());
+			System.out.println(node.root.getNodeScore());
 		}
 		
 		return retVal;

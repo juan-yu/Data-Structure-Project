@@ -20,7 +20,7 @@ public class WordCounter {
 				URL url = new URL(this.urlStr);
 				URLConnection conn = url.openConnection();
 				InputStream in = conn.getInputStream();
-				BufferedReader br = new BufferedReader(new InputStreamReader(in));
+				BufferedReader br = new BufferedReader(new InputStreamReader(in,"UTF-8"));
 				
 				String retVal = "";
 			

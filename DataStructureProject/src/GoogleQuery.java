@@ -73,6 +73,45 @@ public class GoogleQuery
 		}
 		return retVal;
 	}
+public HashMap<String,String> relatedSearch() throws IOException{
+		
+		if(content==null)
+
+		{
+		 content= fetchContent();
+
+		}
+		HashMap<String, String> relatedKeyword = new HashMap<String, String>();
+		Document doc = Jsoup.parse(content);
+		//System.out.println(doc.text());
+		Elements lis = doc.select("div");
+		// System.out.println(lis);
+		lis = lis.select(".iIWm4b");
+		 System.out.println(lis);
+	
+		System.out.println(lis);
+		for(Element li : lis)
+		{
+			try 
+
+			{
+				String citeUrl = li.select("a").get(0).attr("href");
+				citeUrl= java.net.URLDecoder.decode(citeUrl, StandardCharsets.UTF_8);
+				String keyword = citeUrl.substring(citeUrl.indexOf("q=")+2,citeUrl.indexOf("&sa")).replace(" ","");
+				String relatedUrl ="http://www.google.com/search?q="+URLEncoder.encode(keyword, StandardCharsets.UTF_8)+"&oe=utf8&num=30";
+				relatedKeyword.put(keyword, relatedUrl);
+				System.out.println(keyword);
+				System.out.println(relatedUrl);
+			} catch (IndexOutOfBoundsException exc) {
+
+//				e.printStackTrace();
+
+			}
+			
+}
+		return relatedKeyword;
+}
+	
 	public HashMap<String, String> query() throws IOException
 
 	{

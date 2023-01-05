@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import java.io.InputStreamReader;
-
+import java.io.UnsupportedEncodingException;
 import java.net.URL;
 
 import java.net.URLConnection;
@@ -42,7 +42,8 @@ public class GoogleQuery
 	{
 
 		this.searchKeyword = searchKeyword +" 黑歷史"+" 政治";
-		this.url = "http://www.google.com/search?q="+URLEncoder.encode(this.searchKeyword, StandardCharsets.UTF_8)+"&oe=utf8&num=50";
+		this.url = "http://www.google.com/search?q="+URLEncoder.encode(this.searchKeyword, StandardCharsets.UTF_8)+"&oe=utf8&num=30";
+	
 		System.out.println(url);
 	}
 
@@ -52,25 +53,32 @@ public class GoogleQuery
 
 	{
 		String retVal = "";
-
+	
 		URL u = new URL(url);
 
 		URLConnection conn = u.openConnection();
 
 		conn.setRequestProperty("User-agent", "Chrome/7.0.517.44");
 
-		InputStream in = conn.getInputStream();
+	
+		try {InputStream in = conn.getInputStream();
+			
+			InputStreamReader inReader = new InputStreamReader(in,"utf-8");
+			
+			 BufferedReader bufReader = new BufferedReader(inReader);
+			String line = null;
+		
+			while((line=bufReader.readLine())!=null)
+			{
+				retVal += line;
 
-		InputStreamReader inReader = new InputStreamReader(in,"utf-8");
-
-		BufferedReader bufReader = new BufferedReader(inReader);
-		String line = null;
-
-		while((line=bufReader.readLine())!=null)
-		{
-			retVal += line;
-
+			}
+			in.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+		
 		return retVal;
 	}
 public HashMap<String,String> relatedSearch() throws IOException{
@@ -79,7 +87,6 @@ public HashMap<String,String> relatedSearch() throws IOException{
 
 		{
 		 content= fetchContent();
-
 		}
 		HashMap<String, String> relatedKeyword = new HashMap<String, String>();
 		Document doc = Jsoup.parse(content);
@@ -87,9 +94,6 @@ public HashMap<String,String> relatedSearch() throws IOException{
 		Elements lis = doc.select("div");
 		// System.out.println(lis);
 		lis = lis.select(".iIWm4b");
-		 System.out.println(lis);
-	
-		System.out.println(lis);
 		for(Element li : lis)
 		{
 			try 
@@ -114,28 +118,35 @@ public HashMap<String,String> relatedSearch() throws IOException{
 
 	{
 		Keyword a =new Keyword("造假",4);
-	    Keyword b =new Keyword("黑歷史",5);
-	    Keyword c =new Keyword("抄襲",3);
-	    Keyword d =new Keyword("出軌",3);
-	    Keyword e =new Keyword("鬥毆",4);
+	    Keyword b =new Keyword("黑歷史",10);
+	    Keyword c =new Keyword("抄襲",10);
+	    Keyword d =new Keyword("出軌",10);
+	    Keyword e =new Keyword("鬥毆",10);
 	    Keyword f =new Keyword("情色",5);
 	    Keyword h =new Keyword("說大話",4);
-	    Keyword k =new Keyword("外遇",5);
+	    Keyword k =new Keyword("外遇",10);
 	    Keyword l =new Keyword("酒店",4);
 	    Keyword m =new Keyword("鬥爭",4);
 	    Keyword n =new Keyword(this.searchKeyword,5);
 	    Keyword o =new Keyword("造假",5);
 	    Keyword p =new Keyword("黑道",10);
 	    Keyword q =new Keyword("賄選",20);
-	    Keyword r =new Keyword("弊案",10);
+	    Keyword r =new Keyword("弊案",5);
 	    Keyword s =new Keyword("黑金",8);
 	    Keyword t =new Keyword("毒",8);
 	    Keyword u =new Keyword("殺人",10);
 	    Keyword v =new Keyword("涉黑",8);
 	    Keyword w =new Keyword("起底",4);
-	    Keyword x =new Keyword("中資",3);
+	    Keyword x =new Keyword("中資",10);
 	    Keyword y =new Keyword("玩弄",3);
-	    Keyword z =new Keyword("小三",3);
+	    Keyword z =new Keyword("小三",10);
+	    Keyword aa =new Keyword("炒作",10);
+	    Keyword ab =new Keyword("毆打",10);
+	    Keyword ac =new Keyword("抹黑",10);
+	    Keyword ad =new Keyword("抹紅",10);
+	    Keyword ae =new Keyword("大陸",5);
+	    Keyword af =new Keyword("極端",5);
+	    Keyword ag =new Keyword("中國",3);
 
 	    ArrayList<WebTree> Web = new ArrayList<WebTree>();
         ArrayList<Keyword> keywords = new ArrayList<Keyword>();
@@ -162,7 +173,13 @@ public HashMap<String,String> relatedSearch() throws IOException{
         keywords.add(x);
         keywords.add(y);
         keywords.add(z);
-
+        keywords.add(aa);
+        keywords.add(ab);
+        keywords.add(ac);
+        keywords.add(ad);
+        keywords.add(ae);
+        keywords.add(af);
+        keywords.add(ag);
 		if(content==null)
 
 		{
@@ -205,6 +222,7 @@ public HashMap<String,String> relatedSearch() throws IOException{
 						tree.root.addChild(subpage.query().get(j));
 					}
 					System.out.println(title + "," + citeUrl);
+					
 				}
 				Web.add(tree);
 				Web.get(i).setPostOrderScore(keywords);
@@ -224,7 +242,6 @@ public HashMap<String,String> relatedSearch() throws IOException{
 			retVal.put(node.root.getName(), node.root.getUrl());
 			System.out.println(node.root.getNodeScore());
 		}
-		
 		return retVal;
 	
 

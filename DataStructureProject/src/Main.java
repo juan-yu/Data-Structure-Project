@@ -4,7 +4,8 @@ public class Main {
 
 	public static void main(String[] args) throws Exception {
 		GoogleQuery g = new GoogleQuery("­§¤è");
-		g.relatedSearch();
+		g.query();
+		//g.relatedSearch();
 	//	SubPage s =new SubPage("https://www.mirrormedia.mg/story/20191229web002/"); 
 		//s.query();
 		//WordCounter w = new WordCounter("https://www.mirrormedia.mg/story/20191229web002/");

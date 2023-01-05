@@ -112,7 +112,7 @@ public class SubPage
 		int u = 0;
 		 for(int j = 0; j<3;j++) {
 			 if(lis.select("a").get(u).attr("href").length()>4) {
-				 if(u>10) {
+				 if(u>8) {
 					 break;
 				 }
 				 if(lis.select("a").get(u).attr("href").subSequence(0,4).equals("http")) {

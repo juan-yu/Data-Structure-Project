@@ -17,7 +17,9 @@ import javax.servlet.http.HttpServletResponse;
  * Servlet implementation class TestProject
  */
 @WebServlet("/TestProject")
+
 public class TestProject extends HttpServlet {
+	
 	private static final long serialVersionUID = 1L;
     /**
      * @see HttpServlet#HttpServlet()
@@ -32,7 +34,7 @@ public class TestProject extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-	
+		
 		response.setCharacterEncoding("UTF-8");
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html");
@@ -51,9 +53,16 @@ public class TestProject extends HttpServlet {
 			
 			relatedquery = google.relatedSearch();
 			
-		String[][] s = new String[query.size()][2];
+		String[][] s = new String[query.size()+relatedquery.size()][2];
 		request.setAttribute("query", s);
 		int num = 0;
+		for(Entry<String, String> entry : relatedquery.entrySet()) {
+		    String key = entry.getKey();
+		    String value = entry.getValue();
+		    s[num][0] = key;
+		    s[num][1] = value;
+		    num++;
+		}
 		for(Entry<String, String> entry : query.entrySet()) {
 		    String key = entry.getKey();
 		    String value = entry.getValue();
@@ -62,7 +71,11 @@ public class TestProject extends HttpServlet {
 		    num++;
 		}
 		
-
+		if(s ==null || s.length==0) {
+			System.out.println("完蛋");
+			s[0][0]="好像不是政治人物呦";
+			s[0][1]="https://www.nccu.edu.tw/app/home.php";	
+		}
 		request.getRequestDispatcher("googleitem.jsp")
 		 .forward(request, response); 
 		

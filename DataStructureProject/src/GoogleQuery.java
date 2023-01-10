@@ -44,7 +44,7 @@ public class GoogleQuery
 		this.searchKeyword = searchKeyword +" ¶Â¾ú¥v"+" ¬Fªv";
 		this.url = "http://www.google.com/search?q="+URLEncoder.encode(this.searchKeyword, StandardCharsets.UTF_8)+"&oe=utf8&num=30";
 	
-		System.out.println(url);
+		//System.out.println(url);
 	}
 
 	

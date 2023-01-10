@@ -18,7 +18,7 @@ a {
 position:absolute;
 left:50%;
 top: 10%;
-margin-top:-50px;
+margin-top:-40px;
 margin-left:-500px
 }
 a:hover{
@@ -33,21 +33,19 @@ text-decoration:underline;
 <body style='background-color: #f0ffff'>
 <form action='${requestUri}' method='get'>
 
-
-
-
-		<% String[][] List = (String[][]) request.getAttribute("query");
+<% String[][] List = (String[][]) request.getAttribute("query");
 		
 		int j = 0;
-		while(List[j][0].length()<=7){
+		while(List[j][0].contains("r")){
 			j++;
+			
 	}
 	%>
 	<div style='margin-top:190px;text-align:right;margin-right:50px'>
 	<h2>相關搜尋</h2>
 		
 		<% for (int i = 0; i <j; i++) {
-				String sr=List[i][1];
+				String sr=List[i][1].substring(0, List[i][1].length()-1);
 			
 		%>
 		
@@ -75,17 +73,15 @@ text-decoration:underline;
 }
 %>
 	</div>
-	
 
-	
-		
+
 	<div>
 		<img src="images/thai.png"
-			style='position: absolute; width: 300px; height:300px; left: 0%; top: 50%; margin-top: -400px; margin-left: 10px'>
+			style='position: absolute; width: 500px; height:400px; left: 35%; top: 50%; margin-top: 20px;'>
 	</div>
 		<div>
 		<input type='text' class="border-style" id="padding" name='keyword'
-			style='font-size: 120%; position: absolute; left: 50%; top: 48%; margin-top: -150px; margin-left: -400px; width: 800px; height: 25px'
+			style='font-size: 120%; position: absolute; left: 50%; top: 48%; margin-top: -90px; margin-left: -400px; width: 800px; height: 25px'
 			placeholder = '請輸入關鍵字' value='<%=request.getParameter("keyword")%>'/>
 	</div>
 	

@@ -109,40 +109,20 @@ public class SubPage
 		//System.out.println(doc.text());
 		Elements lis = doc.select("div");
 		// System.out.println(lis);
-		int u = 0;
-		 for(int j = 0; j<3;j++) {
-			 if(lis.select("a").get(u).attr("href").length()>4) {
-				 if(u>8) {
-					 break;
-				 }
-				 if(lis.select("a").get(u).attr("href").subSequence(0,4).equals("http")) {
-					 String subpage = lis.select("a").get(u).attr("href");
-					 //System.out.println(subpage);
+		int success = 0;
+		int j = 0;
+		while(success<3 || lis.select("a").get(j).attr("href").equals(null))
+			if(lis.select("a").get(j).attr("href").subSequence(0,4).equals("http")) {
+					 String subpage = lis.select("a").get(j).attr("href");
+					 System.out.println(subpage);
 						WebNode node = new WebNode(new WebPage(subpage,"title"));
 						subpages.add(node);
-						u++;
+						success++;
+						j++;
 				 }
 				 else {
-					 u++;
-					 j--;
-					 continue;
+					 j++;
 				 }
-			
-			 }
-			 else {
-				 u++;
-				 j--;
-				 continue;
-			 }
-			
-		
-		 }
-		// System.out.println(lis.size());
-		 //for(WebNode array:subpages) {
-			//System.out.println(array.webPage.url);
-		 //}
-	
-		
 		return subpages;
 	
 

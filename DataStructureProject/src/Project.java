@@ -18,13 +18,13 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet("/TestProject")
 
-public class TestProject extends HttpServlet {
+public class Project extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public TestProject() {
+    public Project() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -44,7 +44,6 @@ public class TestProject extends HttpServlet {
 			request.getRequestDispatcher("Search.jsp").forward(request, response);
 			return;
 		}
-	
 		GoogleQuery google = new GoogleQuery(request.getParameter("keyword"));
 		HashMap<String, String> query;
 	
@@ -72,10 +71,11 @@ public class TestProject extends HttpServlet {
 		}
 		
 		if(s ==null || s.length==0) {
-			System.out.println("完蛋");
 			s[0][0]="好像不是政治人物呦";
 			s[0][1]="https://www.nccu.edu.tw/app/home.php";	
 		}
+
+		
 		request.getRequestDispatcher("googleitem.jsp")
 		 .forward(request, response); 
 		

@@ -254,20 +254,11 @@ function click80() {
 <div>
 <input type='text' class="border-style" id="padding"  
 style='font-size:120%;position:absolute;left:50%;top:48%;
-margin-top:-47px;margin-left:-400px;width:800px;height:45px' name='keyword' placeholder='請輸入關鍵字'
+margin-top:-47px;margin-left:-400px;width:800px;height:45px' name='keyword' placeholder='please input a politician you what to understand'
 onfocus="placeholder= '' " onblur="placeholder='請輸入關鍵字'" />
 </div>
 <div>
-<button type='button' class='button' name='button20' onclick='click10()' style='border-radius:10px;cursor:pointer;margin-left:-100px'>10</button>
-</div>
-<div>
-<button type='button' class='button' name='button40' onclick='click20()' style='border-radius:10px;cursor:pointer;margin-left:-47.5px'>20</button>
-</div>
-<div>
-<button type='button' class='button' name='button60' onclick='click40()' style='border-radius:10px;cursor:pointer;margin-left:2.5px'>40</button>
-</div>
-<div>
-<button type='button' class='button' name='button80' onclick='click80()' style='border-radius:10px;cursor:pointer;margin-left:52.5px'>80</button>
+<h3 class = 'border-style' style='position:absolute; margin-left:630px; margin-top:0px; left:48; top:50%;'>"The ballot is stronger than the bullet." - Abraham Lincoln </h3> 
 </div>
 <div>
 <input type='text' name='searchNum' value='10' style='color:#0489B1;border-style:none;background-color:#0489B1'>

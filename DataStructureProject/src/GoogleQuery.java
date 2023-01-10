@@ -101,7 +101,7 @@ public HashMap<String,String> relatedSearch() throws IOException{
 			{
 				String citeUrl = li.select("a").get(0).attr("href");
 				citeUrl= java.net.URLDecoder.decode(citeUrl, StandardCharsets.UTF_8);
-				String keyword = citeUrl.substring(citeUrl.indexOf("q=")+2,citeUrl.indexOf("&sa")).replace(" ","");
+				String keyword = citeUrl.substring(citeUrl.indexOf("q=")+2,citeUrl.indexOf("&sa")).replace(" ","")+"r";
 				String relatedUrl ="http://www.google.com/search?q="+URLEncoder.encode(keyword, StandardCharsets.UTF_8)+"&oe=utf8&num=30";
 				relatedKeyword.put(keyword, relatedUrl);
 			} catch (IndexOutOfBoundsException exc) {
@@ -117,36 +117,38 @@ public HashMap<String,String> relatedSearch() throws IOException{
 	public HashMap<String, String> query() throws IOException
 
 	{
-		Keyword a =new Keyword("造假",4);
-	    Keyword b =new Keyword("黑歷史",10);
-	    Keyword c =new Keyword("抄襲",10);
-	    Keyword d =new Keyword("出軌",10);
-	    Keyword e =new Keyword("鬥毆",10);
-	    Keyword f =new Keyword("情色",5);
-	    Keyword h =new Keyword("說大話",4);
-	    Keyword k =new Keyword("外遇",10);
-	    Keyword l =new Keyword("酒店",4);
-	    Keyword m =new Keyword("鬥爭",4);
-	    Keyword n =new Keyword(this.searchKeyword,5);
-	    Keyword o =new Keyword("造假",5);
-	    Keyword p =new Keyword("黑道",10);
-	    Keyword q =new Keyword("賄選",20);
-	    Keyword r =new Keyword("弊案",5);
-	    Keyword s =new Keyword("黑金",8);
-	    Keyword t =new Keyword("毒",8);
-	    Keyword u =new Keyword("殺人",10);
-	    Keyword v =new Keyword("涉黑",8);
-	    Keyword w =new Keyword("起底",4);
-	    Keyword x =new Keyword("中資",10);
-	    Keyword y =new Keyword("玩弄",3);
-	    Keyword z =new Keyword("小三",10);
-	    Keyword aa =new Keyword("炒作",10);
-	    Keyword ab =new Keyword("毆打",10);
-	    Keyword ac =new Keyword("抹黑",10);
-	    Keyword ad =new Keyword("抹紅",10);
-	    Keyword ae =new Keyword("大陸",5);
-	    Keyword af =new Keyword("極端",5);
-	    Keyword ag =new Keyword("中國",3);
+		Keyword a =new Keyword("殺人",10);
+		Keyword b =new Keyword("黑道",10);
+		Keyword c =new Keyword("涉黑",10);
+	    Keyword d =new Keyword(this.searchKeyword,5);
+		Keyword e =new Keyword("造假",5);
+	    Keyword f =new Keyword("黑歷史",5);
+	    Keyword h =new Keyword("出軌",5);
+	    Keyword k =new Keyword("鬥毆",5);
+	    Keyword l =new Keyword("外遇",5);
+	    Keyword m =new Keyword("賄選",5);
+	    Keyword n =new Keyword("弊案",5);
+	    Keyword p =new Keyword("黑金",5);
+	    Keyword q =new Keyword("毒",5);
+	    Keyword r =new Keyword("中資",5);
+	    Keyword s =new Keyword("小三",5);
+	    Keyword t =new Keyword("炒作",5);
+	    Keyword u =new Keyword("毆打",5);
+	    Keyword v =new Keyword("抄襲",5);
+	    Keyword w =new Keyword("抹黑",5);
+	    Keyword x =new Keyword("抹紅",3);
+	    Keyword y =new Keyword("鬥爭",3);
+	    Keyword z =new Keyword("說大話",3);
+	    Keyword aa =new Keyword("大陸",3);
+	    Keyword ab =new Keyword("情色",3);
+	    Keyword ac =new Keyword("起底",2);
+	    Keyword ad =new Keyword("酒店",2);
+	    Keyword ae =new Keyword("玩弄",2);
+	    Keyword af =new Keyword("極端",2);
+	    Keyword ag =new Keyword("好事",-5);
+	    Keyword ah =new Keyword("政績",-5);
+	    Keyword ai =new Keyword("喜愛",-5);
+	    Keyword aj =new Keyword("良心",-5);
 
 	    ArrayList<WebTree> Web = new ArrayList<WebTree>();
         ArrayList<Keyword> keywords = new ArrayList<Keyword>();
@@ -161,7 +163,6 @@ public HashMap<String,String> relatedSearch() throws IOException{
         keywords.add(l);
         keywords.add(m);
         keywords.add(n);
-        keywords.add(o);
         keywords.add(p);
         keywords.add(q);
         keywords.add(r);
@@ -180,6 +181,9 @@ public HashMap<String,String> relatedSearch() throws IOException{
         keywords.add(ae);
         keywords.add(af);
         keywords.add(ag);
+        keywords.add(ah);
+        keywords.add(ai);
+        keywords.add(aj);
 		if(content==null)
 
 		{

@@ -81,10 +81,10 @@ public class SubPage
 					}
 			} catch (UnsupportedEncodingException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+			//	e.printStackTrace();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+		//		e.printStackTrace();
 			}
 		
 
@@ -111,10 +111,13 @@ public class SubPage
 		// System.out.println(lis);
 		int success = 0;
 		int j = 0;
-		while(success<3 || lis.select("a").get(j).attr("href").equals(null))
+		while(success<3 )
+			if(lis.select("a").get(j).attr("href").equals(null)) {
+				j++;
+				continue;
+			}
 			if(lis.select("a").get(j).attr("href").subSequence(0,4).equals("http")) {
 					 String subpage = lis.select("a").get(j).attr("href");
-					 System.out.println(subpage);
 						WebNode node = new WebNode(new WebPage(subpage,"title"));
 						subpages.add(node);
 						success++;

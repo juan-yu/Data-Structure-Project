@@ -44,7 +44,7 @@ public class GoogleQuery
 		this.searchKeyword = searchKeyword +" ¶Â¾ú¥v"+" ¬Fªv";
 		this.url = "http://www.google.com/search?q="+URLEncoder.encode(this.searchKeyword, StandardCharsets.UTF_8)+"&oe=utf8&num=30";
 	
-		//System.out.println(url);
+		System.out.println(url);
 	}
 
 	
@@ -120,7 +120,7 @@ public HashMap<String,String> relatedSearch() throws IOException{
 		Keyword a =new Keyword("±þ¤H",10);
 		Keyword b =new Keyword("¶Â¹D",10);
 		Keyword c =new Keyword("¯A¶Â",10);
-	    Keyword d =new Keyword(this.searchKeyword,5);
+	    Keyword d =new Keyword(this.searchKeyword,100);
 		Keyword e =new Keyword("³y°²",5);
 	    Keyword f =new Keyword("¶Â¾ú¥v",5);
 	    Keyword h =new Keyword("¥X­y",5);
@@ -220,12 +220,16 @@ public HashMap<String,String> relatedSearch() throws IOException{
 		
 				WebPage rootPage = new WebPage(citeUrl,title);
 				WebTree tree = new WebTree(rootPage);
+				
 				if (subpage.query()!=null) {
-					int num = subpage.query().size() - 1;
-					for (int j = 0; j < num; j++) {
-						tree.root.addChild(subpage.query().get(j));
-					}
 					System.out.println(title + "," + citeUrl);
+					for (int j = 0; j < 3; j++) {
+						int page = j+1;
+						tree.root.addChild(subpage.query().get(j));
+						System.out.println("subpage: "+page);
+						System.out.println(subpage.query().get(j).getUrl());
+					}
+					
 					
 				}
 				Web.add(tree);

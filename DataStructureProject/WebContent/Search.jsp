@@ -261,7 +261,7 @@ onfocus="placeholder= '' " onblur="placeholder='請輸入關鍵字'" />
 <h3 class = 'border-style' style='position:absolute; margin-left:630px; margin-top:0px; left:48; top:50%;'>"The ballot is stronger than the bullet." - Abraham Lincoln </h3> 
 </div>
 <div>
-<input type='text' name='searchNum' value='10' style='color:#0489B1;border-style:none;background-color:#0489B1'>
+<input type='text' name='searchNum' value='20' style='color:#0489B1;border-style:none;background-color:#0489B1'>
 </div>
 <div>
 <input type='image' src="images/loupe-2.png" 

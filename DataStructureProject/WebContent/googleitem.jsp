@@ -36,7 +36,7 @@ text-decoration:underline;
 <% String[][] List = (String[][]) request.getAttribute("query");
 		
 		int j = 0;
-		while(List[j][0].contains("r")){
+		while(List[j][0].substring(List[j][0].length()-1, List[j][0].length()).equals("r")){
 			j++;
 			
 	}
@@ -45,11 +45,11 @@ text-decoration:underline;
 	<h2>相關搜尋</h2>
 		
 		<% for (int i = 0; i <j; i++) {
-				String sr=List[i][1].substring(0, List[i][1].length()-1);
+				String sr=List[i][1];
 			
 		%>
 		
-		<a href='<%=sr%>' style='margin-top:190px;text-align:right;margin-right:50px'><%=List[i][0]%> </a><br>連結<br>
+		<a href='<%=sr%>' style='margin-top:190px;text-align:right;margin-right:50px'><%=List[i][0].substring(0, List[i][0].length()-1)%> </a><br>連結<br>
 		<br>
 		
 		<%
